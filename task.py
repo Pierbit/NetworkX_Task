@@ -1,25 +1,43 @@
 import networkx as nx
+from networkx.algorithms import approximation
+from itertools import islice
 
 # Check readme.md for details on each sub-task
 
 def calculate_node_degrees(edges: list) -> dict:
     """Sub-task 1: Calculate the degree of each node in an undirected graph."""
+    g = nx.Graph()
+    g.add_edges_from(edges)
+    return nx.generalized_degree(g)
     pass
 
 def find_shortest_path(edges: list, source: str, target: str) -> list:
     """Sub-task 2: Find the shortest path between source and target nodes."""
+    g = nx.Graph()
+    g.add_edges_from(edges)
+    paths = list(nx.shortest_simple_paths(g, source, target))
+    return paths
     pass
 
 def count_connected_components(edges: list) -> int:
     """Sub-task 3: Count the number of connected components in an undirected graph."""
+    g = nx.Graph()
+    g.add_edges_from(edges)
+    return nx.number_connected_components(g)
     pass
 
 def compute_topological_sort(directed_edges: list) -> list:
     """Sub-task 4: Compute a topological ordering of nodes in a DAG."""
+    dg = nx.DiGraph(list)
+    dg.add_edges_from(directed_edges)
+    return nx.topological_sort(dg)
     pass
 
 def compute_average_clustering(edges: list) -> float:
     """Sub-task 5: Compute the average clustering coefficient of an undirected graph."""
+    g = nx.Graph()
+    g.add_edges_from(edges)
+    return approximation.average_clustering(g, trials = 1000, seed = 10)
     pass
 
 def main():
